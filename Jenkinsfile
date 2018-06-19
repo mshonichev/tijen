@@ -1,2 +1,2 @@
 
-echo 'hello from Pipeline'
+echo 'Fix! from Pipeline'
