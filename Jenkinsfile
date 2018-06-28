@@ -2,7 +2,8 @@ def jobFolder = "User_tests/mshonichev"
 def jobName = "${jobFolder}/test-pipe-from-seed"
 def branchName = "master"
 
-job(jobName) {
+jobDsl(jobName) {
+
     parameters(
         string(defaultValue: '2.5.1-p8', description: 'Ignite version', name: 'IGNITE_VERSION'),
         string(defaultValue: '8.5.1-p8', description: 'GridGain version', name: 'GRIDGAIN_VERSION'),
