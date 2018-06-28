@@ -1,6 +1,9 @@
 ---
+- project:
+  ! include version.yaml
+
 - job:
-    name: User_tests/mshonichev/job-generator
+    name: User_tests/mshonichev/job-generator-{ignite_version}
     description: 'This job generates other jobs!'
     scm:
     - git:
@@ -11,6 +14,8 @@
         timeout: 20
         basedir: dsl
     builders:
+    - shell: |
+        set
     - dsl:
         target: "dsl/*.groovy"
         ignore-existing: "false"
