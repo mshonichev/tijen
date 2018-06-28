@@ -9,12 +9,11 @@
             - origin/master
         credentials-id: mshonichev
         timeout: 20
-        basedir: dsl
     builders:
     - shell: |
         set
     - dsl:
-        target: "dsl/*.groovy"
+        target: "*.groovy"
         ignore-existing: "false"
         removed-job-action: "DISABLE"
         removed-view-action: "DELETE"
