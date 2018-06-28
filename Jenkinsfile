@@ -1,2 +1,2 @@
 
-echo 'hello from Pipeline (master)'
+echo 'hello from Pipeline (master)!'
