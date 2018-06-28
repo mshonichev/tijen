@@ -1,6 +1,5 @@
 ---
-- project:
-  ! include version.yaml
+- !include: version.yaml
 
 - job:
     name: User_tests/mshonichev/job-generator-{ignite_version}
