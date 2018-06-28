@@ -11,8 +11,8 @@ job(jobName) {
         git("git://github.com/tiden.git", branchName)
     }
     steps {
-        sh {
+        sh '''
             bash -x utils/prepare_work_directory.sh
-        }
+        '''
     }
 }
