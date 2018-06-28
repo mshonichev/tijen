@@ -1,2 +1,2 @@
 
-echo 'Fix from Pipeline'
+echo 'Fix from Pipeline.'
