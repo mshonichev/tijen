@@ -6,7 +6,7 @@ folder(ignite_version) {
 
     job('prepare') {
         parameters {
-            string(name='IGNITE_VERSION', defaultValue=ignite_version)
+            stringParam('IGNITE_VERSION', ignite_version, 'Ignite version')
         }
         steps {
              shell('set')
