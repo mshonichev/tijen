@@ -1,8 +1,6 @@
 ---
-- !include: version.yaml
-
 - job:
-    name: User_tests/mshonichev/job-generator-{ignite_version}
+    name: User_tests/mshonichev/job-generator
     description: 'This job generates other jobs!'
     scm:
     - git:
