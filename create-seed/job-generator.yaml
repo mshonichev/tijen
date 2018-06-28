@@ -17,21 +17,3 @@
         removed-job-action: "DISABLE"
         removed-view-action: "DELETE"
         lookup-strategy: "SEED_JOB"
-- job:
-    name: User_tests/mshonichev/job-generator1
-    description: 'This job generates other jobs!'
-    scm:
-    - git:
-        url: https://github.com/mshonichev/tijen.git
-        branches:
-            - origin/master
-        credentials-id: mshonichev
-        timeout: 20
-        basedir: dsl
-    builders:
-    - dsl:
-        target: "dsl/*.groovy"
-        ignore-existing: "false"
-        removed-job-action: "DISABLE"
-        removed-view-action: "DELETE"
-        lookup-strategy: "SEED_JOB"
