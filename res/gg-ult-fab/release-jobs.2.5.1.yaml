@@ -16,29 +16,26 @@ job-branch-folder:
 
 job-regress:
   - job-tiden:
-      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'regress'
 
 job-metrics:
   - job-tiden:
-      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'metrics'
 
 job-snapshots:
   - job-tiden:
-      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'snapshots'
       suite_pattern: 'snapshots.test_snapshots'
-      attr: 'common'
+
+#      attr: 'common'
 # -INDEX
 # pitr_enabled
 
 job-snapshots-pitr:
   - job-tiden:
-      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
-      suite_name: 'snapshots-pitr'
+      suite_name: 'snapshots_pitr'
       suite_pattern: 'snapshots.test_snapshots'
-      attr: 'common'
+#      attr: 'common'
       pitr_enabled: true
 
 # -INDEX
@@ -46,18 +43,15 @@ job-snapshots-pitr:
 
 job-pitr-shared:
   - job-tiden:
-      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
-      suite_name: 'snapshots-pitr-shared'
+      suite_name: 'snapshots_pitr_shared'
 
 job-baseline:
   - job-tiden:
-      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'baseline'
       suite_pattern: 'snapshots.test_baseline'
 
 job-sequences:
   - job-tiden:
-      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'sequences'
-      attr: 'common'
+#      attr: 'common'
 

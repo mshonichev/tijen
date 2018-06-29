@@ -6,7 +6,7 @@ if __name__ == "__main__":
     parser = OptionParser()
     parser.add_option("--var-dir", action='store', default=None)
     parser.add_option("--res-dir", action='store', default=None)
-    parser.add_option("--root-folder", action='store', default='release')
+    parser.add_option("--test-plan", action='store', default='release')
     options, args = parser.parse_args()
 
     # Make var_dir
@@ -29,19 +29,24 @@ if __name__ == "__main__":
 
     template = load_yaml(os.path.join(options.res_dir, 'template.yaml'))
 
-    jobs = versioned_yaml(ignite_version, 'jobs.*.yaml', options.res_dir)
+    jobs = versioned_yaml(ignite_version, options.test_plan + '-jobs.*.yaml', options.res_dir)
 
     for k, v in enumerate(template):
         if 'project' in template[k]:
             template[k]['project']['ignite_version'] = ignite_version
             template[k]['project']['gridgain_version'] = gridgain_version
-            template[k]['project']['root_folder_name'] = options.root_folder
-            template[k]['project']['root_folder_display_name'] = camelcase(options.root_folder)
+            template[k]['project']['root_folder_name'] = options.test_plan
+            template[k]['project']['root_folder_display_name'] = camelcase(options.test_plan)
 
             jobs_list = []
             for job_name, job in jobs.items():
+                if 'job-folder' in job[0].keys():
                 # job[0]['job']['name'] = job_name
-                jobs_list.extend(job)
+                    jobs_list.extend(job)
+            for job_name, job in jobs.items():
+                if 'job-folder' not in job[0].keys():
+                # job[0]['job']['name'] = job_name
+                    jobs_list.extend(job)
 
             if len(jobs_list) > 0:
                 template[k]['project']['jobs'] = jobs_list

@@ -10,6 +10,7 @@
           timeout: 20
           basedir: tiden
 
+# These variables are overridden by prepare-gg-release-tasks.py
 - project:
     name: tiden-release-tasks
     ignite_version: 0
@@ -21,7 +22,6 @@
     edition_name: gridgain-ultimate-fabric
 
 - job-template:
-    job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
     name: '{job_folder}/tiden-{suite_name}'
     id: job-tiden
     project-type: freestyle
@@ -32,10 +32,6 @@
           name: IGNITE_VERSION
           default: '2.5.1-p8'
           description: "Apache Ignite version, ex. 2.5.1"
-      - string:
-          name: GRIDGAIN_VERSION
-          default: '8.5.1-p8'
-          description: "GridGain version, ex. 8.5.1"
       - string:
           name: ATTR
           default:
@@ -130,14 +126,9 @@
 #          claim-build: true
 #          measurement-plots: true
 #          flaky-test-reports: true
-#      - ftp-publisher:
-#          site-name: 'Publish_to_QA_FTP'
-#          uploads:
-#            - source-file: 'var/report-gridgain-{suite_name}.yaml'
-#              file-path: '{ignite_version}/report/'
       - ftp:
           site: 'Publish_to_QA_FTP'
-          source: 'var/report-gridgain-{suite_name}.yaml'
+          source: 'var/report-ignite-{suite_name}.yaml'
           target: '$IGNITE_VERSION/report/'
           flatten: true
           fail-on-error: true
