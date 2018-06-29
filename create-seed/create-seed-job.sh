@@ -1,14 +1,14 @@
 #!/bin/bash
 
-pwd
+#pwd
 
 cd $(dirname $0)
 
-pwd
+#pwd
+#
+#ls -la
 
-ls -la
-
-set
+#set
 
 if [ ! "$JENKINS_HOME" = "" ]; then
     ls -la $JENKINS_HOME
@@ -22,8 +22,8 @@ type jenkins-jobs >/dev/null 2>&1 || {
 }
 
 
-jenkins-jobs --conf jenkins.ini update job-generator.yaml
+jenkins-jobs --conf jenkins.ini update job-generator.yaml || exit 2
 
-ls -la $XDG_CACHE_HOME
+#ls -la $XDG_CACHE_HOME
 
 #cat job-generator.yaml | yq -r '.[].job.name' | xargs -i{} echo "*** Updated {} job ***"
