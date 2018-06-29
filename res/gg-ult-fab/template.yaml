@@ -74,14 +74,14 @@
           bash \
               utils/prepare_work_dir.sh \
                   --work-dir=$WORKSPACE/work \
-                  --var-dir=$$WORKSPACE/var \
+                  --var-dir=$WORKSPACE/var \
                   --config=$WORKSPACE/qa_ftp.yaml \
                   --fetch-deps
 
           bash \
               utils/prepare_artifacts_config.sh \
                   --work-dir=$WORKSPACE/work \
-                  --config=$WORKSPACE/config/jenkins-artifacts-gg-ult-fab.yaml
+                  --config=$WORKSPACE/tiden/config/jenkins-artifacts-gg-ult-fab.yaml
 
           # just copy environment config to working directory for convenience
           cp -f \
