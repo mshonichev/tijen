@@ -6,7 +6,6 @@ if __name__ == "__main__":
     parser = OptionParser()
     parser.add_option("--var-dir", action='store', default=None)
     parser.add_option("--res-dir", action='store', default=None)
-    parser.add_option("--test-plan", action='store', default='release')
     options, args = parser.parse_args()
 
     # Make var_dir
@@ -23,35 +22,51 @@ if __name__ == "__main__":
 
     gridgain_version = os.environ.get('GRIDGAIN_VERSION', '')
 
+    # don't assert on GRIDGAIN_VERSION not set, because it can be only AI release
     # assert gridgain_version != '', "GRIDGAIN_VERSION environment variable not set"
+
+    test_plan = os.environ.get('TEST_PLAN', 'release')
 
     assert options.res_dir is not None, "use --res_dir option to select resources for jobs"
 
-    template = load_yaml(os.path.join(options.res_dir, 'template.yaml'))
+    base_template = os.path.join(os.path.dirname(__file__), 'res', 'template.yaml')
+    print("*** Loading %s ***" % base_template)
 
-    jobs = versioned_yaml(ignite_version, options.test_plan + '-jobs.*.yaml', options.res_dir)
+    # first load 'base' template
+    template = load_yaml(base_template)
+
+    # then extend it with template specific to release type (ai/gg-ult-fab/...)
+    res_template = os.path.abspath(os.path.join(options.res_dir, 'template.yaml'))
+    print("*** Loading %s ***" % res_template)
+    template.extend(load_yaml(res_template))
+
+    print("*** Loading jobs specifications from %s ***" % os.path.abspath(options.res_dir))
+    jobs = versioned_yaml(ignite_version, test_plan + '-jobs.*.yaml', os.path.abspath(options.res_dir))
 
     for k, v in enumerate(template):
         if 'project' in template[k]:
             template[k]['project']['ignite_version'] = ignite_version
             template[k]['project']['gridgain_version'] = gridgain_version
-            template[k]['project']['root_folder_name'] = options.test_plan
-            template[k]['project']['root_folder_display_name'] = camelcase(options.test_plan)
+            template[k]['project']['root_folder_name'] = test_plan
+            template[k]['project']['root_folder_display_name'] = camelcase(test_plan)
 
             jobs_list = []
+            # first collect all folder jobs
             for job_name, job in jobs.items():
                 if 'job-folder' in job[0].keys():
-                # job[0]['job']['name'] = job_name
                     jobs_list.extend(job)
+            # then collect all other jobs
             for job_name, job in jobs.items():
                 if 'job-folder' not in job[0].keys():
-                # job[0]['job']['name'] = job_name
                     jobs_list.extend(job)
 
             if len(jobs_list) > 0:
                 template[k]['project']['jobs'] = jobs_list
 
+            # there should be only one 'project' per release type
             break
 
-    save_yaml(os.path.join(var_dir, 'job-generator.yaml'), template)
-
+    # ok, done preparing, please handle this file to `jenkins-jobs`
+    file = os.path.join(var_dir, 'job-generator.yaml')
+    save_yaml(file, template)
+    print("*** Generated jobs to %s ***" % file)

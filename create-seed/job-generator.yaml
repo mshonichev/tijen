@@ -41,6 +41,13 @@
           name: IGNITE_VERSION
           default: '2.5.1-p8'
           description: "Apache Ignite version, e.g. 2.5.1"
+      - choice:
+          name: TEST_PLAN
+          choices:
+            - Release
+            - Debug
+            - Smoke
+          description: "Test plan determines root folder for tasks generation and a subset of suites."
     builders:
       - shell: |
           cd tijen
@@ -70,11 +77,12 @@
           default: 8.5.1-p8
           description: "GridGain version, e.g. 8.5.1"
       - choice:
-          name: ROOT_FOLDER
+          name: TEST_PLAN
           choices:
             - Release
             - Debug
-          description: "Root folder for tasks generation."
+            - Smoke
+          description: "Test plan determines root folder for tasks generation and a subset of suites."
     builders:
       - shell: |
            cd tijen

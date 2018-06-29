@@ -1,0 +1,18 @@
+---
+
+- scm:
+    name: tiden-repo
+    scm:
+      - git:
+          url: https://github.com/ggprivate/tiden.git
+          branches:
+            - '$BRANCH'
+          credentials-id: mshonichev
+          timeout: 20
+          basedir: tiden
+
+- job-template:
+    name: '{folder_name}'
+    id: 'job-folder'
+    project-type: folder
+    display-name: '{folder_display_name}'

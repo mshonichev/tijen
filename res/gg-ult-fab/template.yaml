@@ -1,15 +1,4 @@
 ---
-- scm:
-    name: tiden-repo
-    scm:
-      - git:
-          url: https://github.com/ggprivate/tiden.git
-          branches:
-            - '$BRANCH'
-          credentials-id: mshonichev
-          timeout: 20
-          basedir: tiden
-
 - project:
     name: tiden-release-tasks
     ignite_version: 0
@@ -141,8 +130,4 @@
           target: '$IGNITE_VERSION/report/'
           flatten: true
           fail-on-error: true
-- job-template:
-    name: '{folder_name}'
-    id: 'job-folder'
-    project-type: folder
-    display-name: '{folder_display_name}'
+

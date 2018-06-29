@@ -1,14 +1,4 @@
 ---
-- scm:
-    name: tiden-repo
-    scm:
-      - git:
-          url: https://github.com/ggprivate/tiden.git
-          branches:
-            - '$BRANCH'
-          credentials-id: mshonichev
-          timeout: 20
-          basedir: tiden
 
 # These variables are overridden by prepare-gg-release-tasks.py
 - project:
@@ -17,9 +7,9 @@
     gridgain_version: 0
     root_folder_name: release
     root_folder_display_name: Release
-    edition_display_name: GridGain Ultimate Edition
-    edition_short_display_name: GG UE
-    edition_name: gridgain-ultimate-fabric
+    edition_display_name: Apache Ignite
+    edition_short_display_name: AI PE
+    edition_name: apache-ignite
 
 - job-template:
     name: '{job_folder}/tiden-{suite_name}'
@@ -132,8 +122,3 @@
           target: '$IGNITE_VERSION/report/'
           flatten: true
           fail-on-error: true
-- job-template:
-    name: '{folder_name}'
-    id: 'job-folder'
-    project-type: folder
-    display-name: '{folder_display_name}'
