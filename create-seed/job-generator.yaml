@@ -74,7 +74,7 @@
            cd tijen
            export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
            python3 prepare-gg-release-tasks.py --var-dir var --res-dir res/gg-ult-fab || exit 1
-           jenkins-jobs --conf create-seed/jenkins.ini update var || exit 2
+           jenkins-jobs --conf create-seed/jenkins.ini update var/job-generator.yaml || exit 2
 
 #    - shell: |
 #        cd tiden
