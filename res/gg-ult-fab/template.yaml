@@ -69,6 +69,7 @@
       - tiden-repo
     wrappers:
       - workspace-cleanup:
+          include: .*
       - timestamps
       - build-user-vars
       - ansicolor:
