@@ -5,12 +5,12 @@ job-root-folder:
       folder_display_name: '{root_folder_display_name}'
 
 job-edition-folder:
-  - 'folder_name':
+  - '{folder_name}':
       folder_name: '{root_folder_name}/{edition_name}'
       folder_display_name: '{edition_display_name} distributed tests'
 
 job-branch-folder:
-  - 'folder_name':
+  - '{folder_name}':
       folder_name: '{root_folder_name}/{edition_name}/{ignite_version}'
       folder_display_name: '{edition_display_name} {ignite_version} distributed tests'
 
