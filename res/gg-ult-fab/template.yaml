@@ -55,11 +55,34 @@
       - tiden-repo
     builders:
       - build-name-setter:
-          template: '#${{BUILD_NUMBER}} - ${{GRIDGAIN_VERSION}}'
+          template: '#$BUILD_NUMBER - $GRIDGAIN_VERSION'
           macro: true
       - shell: |
+          echo "#### Cleanup & create work/var folders at '$WORKSPACE' ####"
+          rm -rf $WORKSPACE/work 2>/dev/null
+          rm -rf $WORKSPACE/var 2>/dev/null
+          mkdir -p $WORKSPACE/work
+          mkdir -p $WORKSPACE/var
+
+          echo "#### Prepare working directory for '$GRIDGAIN_VERSION/$IGNITE_VERSION' ####"
           cd tiden
-          bash utils/prepare_work_dir.sh
+
+          bash \
+              utils/prepare_work_dir.sh \
+                  --work-dir=$WORKSPACE/work \
+                  --var-dir=$$WORKSPACE/var \
+                  --config=$WORKSPACE/qa_ftp.yaml \
+                  --fetch-deps
+
+          bash \
+              utils/prepare_artifacts_config.sh \
+                  --work-dir=$WORKSPACE/work \
+                  --config=$WORKSPACE/config/jenkins-artifacts-gg-ult-fab.yaml
+
+          # just copy environment config to working directory for convenience
+          cp -f \
+              $WORKSPACE/config/env_jenkins.yaml \
+              $WORKSPACE/work/
       - shell: |
           cd tiden
           bash utils/run-tests.sh {suite_name}
