@@ -5,7 +5,7 @@
       - git:
           url: https://github.com/ggprivate/tiden.git
           branches:
-            - '*/master'
+            - '$BRANCH'
           credentials-id: mshonichev
           timeout: 20
           basedir: tiden
@@ -110,11 +110,11 @@
       - shell: |
           cd tiden
           export SHARED_ROOT=$WORKSPACE
-          bash utils/run-tests.sh {suite_name}
+          bash utils/run-tests.sh {suite_name} {suite_pattern}
     publishers:
       - description-setter:
-          regexp: "Desc: (.*)"
-          regexp-for-failed: "Desc: (.*)"
+          regexp: "^Desc: (.*)"
+          regexp-for-failed: "^Desc: (.*)"
           description: "\\1"
           description-for-failed: "\\1"
       - archive:

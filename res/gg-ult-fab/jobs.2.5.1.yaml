@@ -18,11 +18,13 @@ job-regress:
   - job-tiden:
       job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'regress'
+      suite_pattern: 'regress'
 
 job-metrics:
   - job-tiden:
       job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'metrics'
+      suite_pattern: 'metrics'
 
 job-snapshots:
   - job-tiden:
@@ -38,9 +40,11 @@ job-baseline:
   - job-tiden:
       job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'baseline'
+      suite_pattern: 'snapshots.test_baseline'
 
 job-sequences:
   - job-tiden:
       job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'sequences'
+      attr: 'common'
 
