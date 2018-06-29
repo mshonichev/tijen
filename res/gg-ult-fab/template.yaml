@@ -72,7 +72,7 @@
       - timestamps
       - build-user-vars
       - ansicolor:
-          colormap: gnome_terminal
+          colormap: gnome-terminal
     builders:
       - build-name-setter:
           template: '#$BUILD_NUMBER - $GRIDGAIN_VERSION'
