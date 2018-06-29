@@ -32,6 +32,7 @@
     project-type: folder
 - job:
     name: Release/Util/util-create-ignite-release-tasks
+    project-type: pipeline
     description: 'This job generates Jenkins tasks for Apache Ignite release\n'
     display-name: '[util] Create AI release tasks'
     scm:
