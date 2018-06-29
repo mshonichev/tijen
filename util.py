@@ -1,6 +1,20 @@
 from re import sub, search
 import yaml
 from glob import glob
+import re
+
+def load_yaml(yaml_path):
+    data = None
+    with open(yaml_path, 'r') as f:
+        data = yaml.load(f)
+    return data
+
+def save_yaml(yaml_path, data):
+    with open(yaml_path, 'w') as w:
+         yaml.dump(data, stream=w, line_break=True)
+
+def camelcase(s):
+    return re.sub(r'\w+', lambda m: m.group(0).capitalize(), s)
 
 def version_num(version_text):
     """
