@@ -3,22 +3,22 @@
     name: tiden
     scm:
       - git:
-        url: https://github.com/ggprivate/tiden.git
-        branches:
-          - '*/master'
-        credentials-id: mshonichev
-        timeout: 20
-        basedir: tiden
+          url: https://github.com/ggprivate/tiden.git
+          branches:
+            - '*/master'
+          credentials-id: mshonichev
+          timeout: 20
+          basedir: tiden
 - scm:
     name: tijen
     scm:
       - git:
-        url: https://github.com/mshonichev/tijen.git
-        branches:
-          - '*/master'
-        credentials-id: mshonichev
-        timeout: 20
-        basedir: tijen
+          url: https://github.com/mshonichev/tijen.git
+          branches:
+            - '*/master'
+          credentials-id: mshonichev
+          timeout: 20
+          basedir: tijen
 - scm:
     name: tiden-and-tijen
     scm:
