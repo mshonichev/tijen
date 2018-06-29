@@ -1,13 +1,4 @@
 ---
-- scm:
-    - git:
-        url: https://github.com/ggprivate/tiden.git
-        branches:
-          - '*/master'
-        credentials-id: mshonichev
-        timeout: 20
-        basedir: tiden
-
 - project:
     ignite_version: 0
     gridgain_version: 0
