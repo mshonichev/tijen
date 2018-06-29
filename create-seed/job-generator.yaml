@@ -70,7 +70,9 @@
           name: GRIDGAIN_VERSION
           default: 8.5.1-p8
           description: "GridGain version, e.g. 8.5.1"
-    builders:
+  wrappers:
+    - ansicolor
+  builders:
      - shell: |
          cd tijen
          export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)

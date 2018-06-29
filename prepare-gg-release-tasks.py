@@ -5,7 +5,7 @@ from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("--var_dir", action='store', default=None)
 parser.add_option("--res_dir", action='store', default=None)
-opts, args = parser.parse_args()
+options, args = parser.parse_args()
 
 # Make var_dir
 if options.var_dir is None:
