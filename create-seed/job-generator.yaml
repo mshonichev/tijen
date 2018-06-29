@@ -20,11 +20,41 @@
     parameters:
       - string:
           name: IGNITE_VERSION
+          default: 2.5.1-p8
           description: "Apache Ignite version, e.g. 2.5.1"
     builders:
     - shell: |
         cd tiden
-        util/prepare_work_directory.sh
+        utils/prepare_work_dir.sh
+    - shell: |
+        pwd
+        ls -1 tiden/suites
+        python3 run-tests.py --help
+- job:
+    name: Release/Util/util-create-gridgain-release-tasks
+    description: 'This job generates Jenkins tasks for GridGain Ultimate Edition release\n'
+    display-name: '[util] Create GG UE release tasks'
+    scm:
+      - git:
+          url: https://github.com/ggprivate/tiden.git
+          branches:
+            - '*/master'
+          credentials-id: mshonichev
+          timeout: 20
+          basedir: tiden
+    parameters:
+      - string:
+          name: IGNITE_VERSION
+          default: 2.5.1-p8
+          description: "Apache Ignite version, e.g. 2.5.1"
+      - string:
+          name: GRIDGAIN_VERSION
+          default: 8.5.1-p8
+          description: "Apache Ignite version, e.g. 8.5.1"
+    builders:
+    - shell: |
+        cd tiden
+        utils/prepare_work_dir.sh
     - shell: |
         pwd
         ls -1 tiden/suites
