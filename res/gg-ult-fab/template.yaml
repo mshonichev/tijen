@@ -138,6 +138,8 @@
           site: 'Publish_to_QA_FTP'
           source: 'var/report-gridgain-{suite_name}.yaml'
           target: '$IGNITE_VERSION/report/'
+          flatten: true
+          fail-on-error: true
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
