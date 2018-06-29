@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
             jobs_list = []
             for job_name, job in jobs.items():
-                job[0]['job']['name'] = job_name
+                # job[0]['job']['name'] = job_name
                 jobs_list.extend(job)
 
             if len(jobs_list) > 0:

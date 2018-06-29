@@ -51,3 +51,8 @@
           description: "Attribute match policy. Applies only when 'ATTR' is not empty."
     scm:
       - tiden-repo
+
+- job-template:
+    name: '{folder_name}'
+    project-type: folder
+    display-name: '{folder_display_name}'
