@@ -88,7 +88,7 @@
           mkdir -p $WORKSPACE/work
           mkdir -p $WORKSPACE/var
 
-          echo "#### Prepare working directory for '$GRIDGAIN_VERSION/$IGNITE_VERSION' ####"
+          echo "#### Prepare working directory for '$IGNITE_VERSION/$GRIDGAIN_VERSION' ####"
           cd tiden
 
           bash \
@@ -111,6 +111,12 @@
           cd tiden
           export SHARED_ROOT=$WORKSPACE
           bash utils/run-tests.sh {suite_name}
+    publishers:
+      - archive:
+          artifacts: 'var/**/*'
+          allow-empty: 'true'
+          fingerprint: false
+          default-excludes: true
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
