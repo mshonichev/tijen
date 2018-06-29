@@ -54,9 +54,9 @@
     scm:
       - tiden-repo
     builders:
-      build-name-setter:
-        template: '#${{BUILD_NUMBER}} - ${{GRIDGAIN_VERSION}}'
-        macro: True
+      - build-name-setter:
+          template: '#${BUILD_NUMBER} - ${GRIDGAIN_VERSION}'
+          macro: true
 
 - job-template:
     name: '{folder_name}'
