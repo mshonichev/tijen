@@ -39,3 +39,8 @@ job-baseline:
       job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'baseline'
 
+job-sequences:
+  - job-tiden:
+      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
+      suite_name: 'sequences'
+
