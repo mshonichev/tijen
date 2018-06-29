@@ -129,8 +129,13 @@
 #          claim-build: true
 #          measurement-plots: true
 #          flaky-test-reports: true
-      - ftp-publisher:
-          site-name: 'Publish_to_QA_FTP'
+#      - ftp-publisher:
+#          site-name: 'Publish_to_QA_FTP'
+#          uploads:
+#            - source-file: 'var/report-gridgain-{suite_name}.yaml'
+#              file-path: '{ignite_version}/report/'
+      - ftp:
+          site: 'Publish_to_QA_FTP'
           uploads:
             - source-file: 'var/report-gridgain-{suite_name}.yaml'
               file-path: '{ignite_version}/report/'
