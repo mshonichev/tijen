@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
     template = load_yaml(os.path.join(options.res_dir, 'template.yaml'))
 
-    jobs = versioned_yaml(ignite_version, 'jobs-*.yaml', options.res_dir)
+    jobs = versioned_yaml(ignite_version, 'jobs.*.yaml', options.res_dir)
 
     for k, v in enumerate(template):
         if 'project' in template[k]:
