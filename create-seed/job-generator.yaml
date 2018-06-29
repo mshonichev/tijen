@@ -71,8 +71,8 @@
           default: 8.5.1-p8
           description: "GridGain version, e.g. 8.5.1"
   wrappers:
-     - ansicolor
-     - timestamp
+    - ansicolor
+    - timestamp
   builders:
      - shell: |
          cd tijen
