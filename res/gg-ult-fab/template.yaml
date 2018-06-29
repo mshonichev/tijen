@@ -20,7 +20,8 @@
     edition_name: gridgain-ultimate-fabric
 
 - job-template:
-    name: tiden-job-template
+    name: 'tiden-{suite_name}'
+    id: job-tiden
     project-type: freestyle
     parameters:
       - string:
@@ -54,5 +55,6 @@
 
 - job-template:
     name: '{folder_name}'
+    id: 'job-folder'
     project-type: folder
     display-name: '{folder_display_name}'
