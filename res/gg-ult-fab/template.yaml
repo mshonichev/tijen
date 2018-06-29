@@ -47,8 +47,12 @@
           description: "IP for client hosts, separated with comma. Please rewrite the default value."
       - git-parameter:
           name: BRANCH
-          description: Tiden repo branch
-          type: PT_BRANCH_TAG
+          description: Tiden branch name
+          type: PT_BRANCH
+          sortMode: ASCENDING_SMART
+          defaultValue: origin/master
+          selectedValue: DEFAULT
+          branchFilter: .*
       - choice:
           name: ATTR_MATCH
           choices:
