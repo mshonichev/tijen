@@ -18,6 +18,8 @@
             - */master
           credentials-id: mshonichev
           timeout: 20
+#          browser: githubweb
+#          browser-url: https://github.com/
           basedir: tiden
 #      - git:
 #          url: https://github.com/mshonichev/tijen.git
