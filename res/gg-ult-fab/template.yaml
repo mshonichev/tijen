@@ -18,3 +18,36 @@
     root_folder_display_name: Release
     edition_display_name: GridGain Ultimate Edition
     edition_name: gridgain-ultimate-fabric
+
+- job-template:
+    name: tiden-job-template
+    project-type: freestyle
+    parameters:
+      - string:
+          name: IGNITE_VERSION
+          default: '2.5.1-p8'
+          description: "Apache Ignite version, ex. 2.5.1"
+      - string:
+          name: GRIDGAIN_VERSION
+          default: '8.5.1-p8'
+          description: "GridGain version, ex. 8.5.1"
+      - string:
+          name: ATTR
+          default:
+          description: "Attributes list for test selection, comma separated. You can put tests names here."
+      - string:
+          name: SERVER_HOSTS
+          default: '172.25.1.37,172.25.1.38'
+          description: "IP for server hosts separated with comma. Please rewrite the default value."
+      - string:
+          name: CLIENT_HOSTS
+          default: '172.25.1.37,172.25.1.38'
+          description: "IP for client hosts, separated with comma. Please rewrite the default value."
+      - choice:
+          name: ATTR_MATCH
+          choices:
+            - any
+            - all
+          description: "Attribute match policy. Applies only when 'ATTR' is not empty."
+    scm:
+      - tiden-repo
