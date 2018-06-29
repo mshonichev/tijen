@@ -13,7 +13,7 @@ if options.var_dir is None:
 else:
     var_dir = options.var_dir
 
-os.makedirs(var_dir, exists_ok=True)
+os.makedirs(var_dir, exist_ok=True)
 
 from util import versioned_yaml
 
