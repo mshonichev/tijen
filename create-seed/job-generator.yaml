@@ -24,14 +24,14 @@
     scm:
       - tiden
       - tijen
+#- job:
+#    name: Release
+#    project-type: folder
+#- job:
+#    name: Release/Util
+#    project-type: folder
 - job:
-    name: Release
-    project-type: folder
-- job:
-    name: Release/Util
-    project-type: folder
-- job:
-    name: Release/Util/util-create-ignite-release-tasks
+    name: util/util-create-ignite-release-tasks
     description: 'This job generates Jenkins tasks for Apache Ignite release'
     display-name: '[util] Create AI release tasks'
     scm:
@@ -55,7 +55,7 @@
 #        ls -1 tiden/suites
 #        python3 run-tests.py --help
 - job:
-    name: Release/Util/util-create-gridgain-release-tasks
+    name: util/util-create-gridgain-release-tasks
     description: 'This job generates Jenkins tasks for GridGain Ultimate Edition release'
     display-name: '[util] Create GG UE release tasks'
     scm:
