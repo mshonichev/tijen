@@ -137,7 +137,7 @@
       - ftp:
           site: 'Publish_to_QA_FTP'
           source: 'var/report-gridgain-{suite_name}.yaml'
-          target: '${IGNITE_VERSION}/report/'
+          target: '$IGNITE_VERSION/report/'
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
