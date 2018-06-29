@@ -16,3 +16,10 @@
     id: 'job-folder'
     project-type: folder
     display-name: '{folder_display_name}'
+
+- view-template:
+    name: tests
+    view-type: list
+    description: Tests
+    regex: 'tiden-*'
+

@@ -8,6 +8,8 @@
     edition_display_name: GridGain Ultimate Edition
     edition_short_display_name: GG UE
     edition_name: gridgain-ultimate-fabric
+    views:
+      - tests
 
 - job-template:
     name: '{job_folder}/tiden-{suite_name}'
