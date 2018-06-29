@@ -41,6 +41,9 @@
           name: IGNITE_VERSION
           default: 2.5.1-p8
           description: "Apache Ignite version, e.g. 2.5.1"
+    wrappers:
+      - ansicolor:
+      - timestamp:
     builders:
      - shell: |
          cd tijen
@@ -70,15 +73,15 @@
           name: GRIDGAIN_VERSION
           default: 8.5.1-p8
           description: "GridGain version, e.g. 8.5.1"
-  wrappers:
-    - ansicolor:
-    - timestamp:
-  builders:
-     - shell: |
-         cd tijen
-         export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
-         python3 prepare-gg-release-tasks.py --var_dir var --res_dir res/gg-ult-fab || exit 1
-         jenkins-jobs --conf create_seed/jenkins.ini update var || exit 2
+    wrappers:
+      - ansicolor:
+      - timestamp:
+    builders:
+       - shell: |
+           cd tijen
+           export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
+           python3 prepare-gg-release-tasks.py --var_dir var --res_dir res/gg-ult-fab || exit 1
+           jenkins-jobs --conf create_seed/jenkins.ini update var || exit 2
 
 #    - shell: |
 #        cd tiden
