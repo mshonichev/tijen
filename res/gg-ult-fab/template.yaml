@@ -20,6 +20,7 @@
     edition_name: gridgain-ultimate-fabric
 
 - job-template:
+    name: '{job_folder}/tiden-{suite_name}'
     id: job-tiden
     project-type: freestyle
     parameters:

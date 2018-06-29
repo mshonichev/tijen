@@ -16,6 +16,6 @@ job-branch-folder:
 
 job-regress:
   - job-tiden:
-      name: '{root_folder_name}/{edition_name}/{ignite_version}/tiden-{suite_name}'
+      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'regress'
 
