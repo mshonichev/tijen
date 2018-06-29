@@ -136,9 +136,8 @@
 #              file-path: '{ignite_version}/report/'
       - ftp:
           site: 'Publish_to_QA_FTP'
-          uploads:
-            - source: 'var/report-gridgain-{suite_name}.yaml'
-              target: '{ignite_version}/report/'
+          source: 'var/report-gridgain-{suite_name}.yaml'
+          target: '{ignite_version}/report/'
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
