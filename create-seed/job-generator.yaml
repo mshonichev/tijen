@@ -12,9 +12,9 @@
     builders:
     - shell: |
         set
-    - dsl:
-        target: "*.groovy"
-        ignore-existing: "false"
-        removed-job-action: "DISABLE"
-        removed-view-action: "DELETE"
-        lookup-strategy: "SEED_JOB"
+#    - dsl:
+#        target: "*.groovy"
+#        ignore-existing: "false"
+#        removed-job-action: "DISABLE"
+#        removed-view-action: "DELETE"
+#        lookup-strategy: "SEED_JOB"
