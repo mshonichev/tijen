@@ -10,20 +10,22 @@
     description: 'This job generates Jenkins tasks for Apache Ignite release\n'
     display-name: [util] Create AI release tasks
     scm:
+#      - name: tiden
+#        scm:
       - git:
           url: https://github.com/ggprivate/tiden.git
           branches:
-              - origin/master
+            - */master
           credentials-id: mshonichev
           timeout: 20
           basedir: tiden
-      - git:
-          url: https://github.com/mshonichev/tijen.git
-          branches:
-              - origin/master
-          credentials-id: mshonichev
-          timeout: 20
-          basedir: tijen
+#      - git:
+#          url: https://github.com/mshonichev/tijen.git
+#          branches:
+#              - origin/master
+#          credentials-id: mshonichev
+#          timeout: 20
+#          basedir: tijen
     parameters:
       - string:
           name: IGNITE_VERSION
