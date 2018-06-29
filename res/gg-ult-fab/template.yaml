@@ -124,6 +124,11 @@
           default-excludes: true
       - junit:
           results: var/xunit.xml
+          allow-empty-results: true
+          test-stability: true
+#          claim-build: true
+#          measurement-plots: true
+#          flaky-test-reports: true
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
