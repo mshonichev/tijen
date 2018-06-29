@@ -1,7 +1,6 @@
 import os
 
 from optparse import OptionParser
-from glob import glob
 
 parser = OptionParser()
 parser.add_option("--var_dir", action='store', default=None)

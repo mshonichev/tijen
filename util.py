@@ -1,5 +1,6 @@
 from re import sub, search
 import yaml
+from glob import glob
 
 def version_num(version_text):
     """
