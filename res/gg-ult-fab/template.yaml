@@ -61,6 +61,11 @@
           description: "Attribute match policy. Applies only when 'ATTR' is not empty."
     scm:
       - tiden-repo
+    wrappers:
+      - timestamps
+      - build-user-vars
+      - ansicolor:
+          colormap: gnome_terminal
     builders:
       - build-name-setter:
           template: '#$BUILD_NUMBER - $GRIDGAIN_VERSION'
