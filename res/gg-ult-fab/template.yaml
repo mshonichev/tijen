@@ -45,6 +45,10 @@
           name: CLIENT_HOSTS
           default: '172.25.1.37,172.25.1.38'
           description: "IP for client hosts, separated with comma. Please rewrite the default value."
+      - git-parameter:
+          name: BRANCH
+          description: Tiden repo branch
+          type: PT_BRANCH_TAG
       - choice:
           name: ATTR_MATCH
           choices:
@@ -85,10 +89,11 @@
 
           # just copy environment config to working directory for convenience
           cp -f \
-              $WORKSPACE/config/env_jenkins.yaml \
+              $WORKSPACE/tiden/config/env_jenkins.yaml \
               $WORKSPACE/work/
       - shell: |
           cd tiden
+          export SHARED_ROOT=$WORKSPACE
           bash utils/run-tests.sh {suite_name}
 - job-template:
     name: '{folder_name}'
