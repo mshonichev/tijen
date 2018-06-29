@@ -7,12 +7,12 @@ job-root-folder:
 job-edition-folder:
   - job-folder:
       folder_name: '{root_folder_name}/{edition_name}'
-      folder_display_name: '{edition_display_name} distributed tests'
+      folder_display_name: '{edition_display_name}'
 
 job-branch-folder:
   - job-folder:
       folder_name: '{root_folder_name}/{edition_name}/{ignite_version}'
-      folder_display_name: '{edition_display_name} {ignite_version} distributed tests'
+      folder_display_name: '{edition_short_display_name} {ignite_version}/{gridgain_version} distributed tests'
 
 job-regress:
   - job-tiden:

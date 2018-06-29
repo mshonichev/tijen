@@ -17,6 +17,7 @@
     root_folder_name: release
     root_folder_display_name: Release
     edition_display_name: GridGain Ultimate Edition
+    edition_short_display_name: GG UE
     edition_name: gridgain-ultimate-fabric
 
 - job-template:
@@ -54,7 +55,7 @@
       - tiden-repo
     builders:
       build-name-setter:
-        template: '#${BUILD_NUMBER} - ${GRIDGAIN_VERSION}'
+        template: '#${{BUILD_NUMBER}} - ${{GRIDGAIN_VERSION}}'
         macro: True
 
 - job-template:
