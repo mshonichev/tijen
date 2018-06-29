@@ -40,8 +40,8 @@ if __name__ == "__main__":
 
             jobs_list = []
             for job_name, job in jobs.items():
-                job['name'] = job_name
-                jobs_list.append(job.copy())
+                job[0]['job']['name'] = job_name
+                jobs_list.extend(job)
 
             if len(jobs_list) > 0:
                 template[k]['project']['jobs'] = jobs_list
