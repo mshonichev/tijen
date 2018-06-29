@@ -59,7 +59,7 @@
           macro: true
       - config-file-provider:
           files:
-            - file-id: qa_ftp.yaml
+            - file-id: 6fbbc991-7e18-40d3-a1b3-090fbc4dbe19
               target: $WORKSPACE/qa_ftp.yaml
       - shell: |
           echo "#### Cleanup & create work/var folders at '$WORKSPACE' ####"
