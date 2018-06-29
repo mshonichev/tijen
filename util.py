@@ -1,3 +1,5 @@
+from re import sub, search
+import yaml
 
 def version_num(version_text):
     """
