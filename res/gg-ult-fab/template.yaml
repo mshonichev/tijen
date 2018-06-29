@@ -68,6 +68,8 @@
     scm:
       - tiden-repo
     wrappers:
+      - build-name:
+          name: '#$BUILD_NUMBER - $GRIDGAIN_VERSION'
       - workspace-cleanup:
           include: []
       - timestamps
@@ -75,9 +77,6 @@
       - ansicolor:
           colormap: gnome-terminal
     builders:
-      - build-name-setter:
-          template: '#$BUILD_NUMBER - $GRIDGAIN_VERSION'
-          macro: true
       - config-file-provider:
           files:
             - file-id: 6fbbc991-7e18-40d3-a1b3-090fbc4dbe19
