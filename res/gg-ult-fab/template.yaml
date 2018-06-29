@@ -45,6 +45,10 @@
           name: CLIENT_HOSTS
           default: '172.25.1.37,172.25.1.38'
           description: "IP for client hosts, separated with comma. Please rewrite the default value."
+      - string:
+          name: ZK_HOSTS
+          default: ''
+          description: "IP for Zookeeper hosts, separated with comma. Please rewrite the default value."
       - git-parameter:
           name: BRANCH
           description: Tiden branch name
