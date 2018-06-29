@@ -55,9 +55,14 @@
       - tiden-repo
     builders:
       - build-name-setter:
-          template: '#${BUILD_NUMBER} - ${GRIDGAIN_VERSION}'
+          template: '#${{BUILD_NUMBER}} - ${{GRIDGAIN_VERSION}}'
           macro: true
-
+      - shell: |
+          cd tiden
+          bash utils/prepare_work_dir.sh
+      - shell: |
+          cd tiden
+          bash utils/run-tests.sh {suite_name}
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
