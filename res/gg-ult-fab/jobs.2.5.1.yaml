@@ -19,3 +19,23 @@ job-regress:
       job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'regress'
 
+job-metrics:
+  - job-tiden:
+      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
+      suite_name: 'metrics'
+
+job-snapshots:
+  - job-tiden:
+      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
+      suite_name: 'snapshots'
+
+job-pitr-shared:
+  - job-tiden:
+      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
+      suite_name: 'pitr'
+
+job-baseline:
+  - job-tiden:
+      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
+      suite_name: 'baseline'
+
