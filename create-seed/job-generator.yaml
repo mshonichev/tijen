@@ -32,24 +32,21 @@
     project-type: folder
 - job:
     name: Release/Util/util-create-ignite-release-tasks
-    description: 'This job generates Jenkins tasks for Apache Ignite release\n'
+    description: 'This job generates Jenkins tasks for Apache Ignite release'
     display-name: '[util] Create AI release tasks'
     scm:
       - tijen
     parameters:
       - string:
           name: IGNITE_VERSION
-          default: 2.5.1-p8
+          default: '2.5.1-p8'
           description: "Apache Ignite version, e.g. 2.5.1"
-    wrappers:
-      - ansicolor:
-      - timestamp:
     builders:
-     - shell: |
-         cd tijen
-         export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
-         python3 prepare-gg-release-tasks.py --var_dir var --res_dir res/ai || exit 1
-         jenkins-jobs --conf create_seed/jenkins.ini update var || exit 2
+      - shell: |
+          cd tijen
+          export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
+          python3 prepare-gg-release-tasks.py --var_dir var --res_dir res/ai || exit 1
+          jenkins-jobs --conf create_seed/jenkins.ini update var || exit 2
 #    - shell: |
 #        cd tiden
 #        utils/prepare_work_dir.sh
@@ -59,8 +56,7 @@
 #        python3 run-tests.py --help
 - job:
     name: Release/Util/util-create-gridgain-release-tasks
-    description: 'This job generates Jenkins tasks for GridGain Ultimate Edition release
-    '
+    description: 'This job generates Jenkins tasks for GridGain Ultimate Edition release'
     display-name: '[util] Create GG UE release tasks'
     scm:
       - tijen
@@ -73,11 +69,8 @@
           name: GRIDGAIN_VERSION
           default: 8.5.1-p8
           description: "GridGain version, e.g. 8.5.1"
-    wrappers:
-      - ansicolor:
-      - timestamp:
     builders:
-       - shell: |
+      - shell: |
            cd tijen
            export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
            python3 prepare-gg-release-tasks.py --var_dir var --res_dir res/gg-ult-fab || exit 1
