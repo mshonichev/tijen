@@ -1,17 +1,40 @@
 ---
 - job:
-    name: User_tests/mshonichev/job-generator
-    description: 'This job generates other jobs!'
+    name: Release
+    project-type: folder
+- job:
+    name: Release/Util
+    project-type: folder
+- job:
+    name: Release/Util/util-create-ignite-release-tasks
+    description: 'This job generates Jenkins tasks for Apache Ignite release'
     scm:
+    - git:
+        url: https://github.com/ggprivate/tiden.git
+        branches:
+            - origin/master
+        credentials-id: mshonichev
+        timeout: 20
+        basedir: tiden
     - git:
         url: https://github.com/mshonichev/tijen.git
         branches:
             - origin/master
         credentials-id: mshonichev
         timeout: 20
+        basedir: tijen
+    parameters:
+      - string:
+          name: IGNITE_VERSION
+          description: "Apache Ignite version, e.g. 2.5.1"
     builders:
     - shell: |
-        set
+        cd tiden
+        util/prepare_work_directory.sh
+    - shell: |
+        pwd
+        ls -1 tiden/suites
+        python3 run-tests.py --help
 #    - dsl:
 #        target: "*.groovy"
 #        ignore-existing: "false"
