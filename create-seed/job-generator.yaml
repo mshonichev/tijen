@@ -32,11 +32,10 @@
     project-type: folder
 - job:
     name: Release/Util/util-create-ignite-release-tasks
-    project-type: pipeline
     description: 'This job generates Jenkins tasks for Apache Ignite release\n'
     display-name: '[util] Create AI release tasks'
     scm:
-      - tiden-and-tijen
+      - tijen
     parameters:
       - string:
           name: IGNITE_VERSION
@@ -61,7 +60,7 @@
     '
     display-name: '[util] Create GG UE release tasks'
     scm:
-      - tiden-and-tijen
+      - tijen
     parameters:
       - string:
           name: IGNITE_VERSION
