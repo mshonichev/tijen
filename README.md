@@ -1,3 +1,3 @@
-# tijen
+# Tijen
 
-Scripts for Ignite Jenkins pipeline experiments.
+Scripts for Tiden on Jenkins pipeline/jobs builder experiments.

@@ -131,3 +131,113 @@
           flatten: true
           fail-on-error: true
 
+
+
+
+- job-template:
+    job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
+    name: '{job_folder}/tiden-{suite_name}'
+    id: job-tiden-debug
+    project-type: freestyle
+    description: 'Run suite {suite_name}'
+    display_name: '[suite] {suite_description}'
+    parameters:
+      - string:
+          name: IGNITE_VERSION
+          default: '2.5.1-p8'
+          description: "Apache Ignite version, ex. 2.5.1"
+      - string:
+          name: GRIDGAIN_VERSION
+          default: '8.5.1-p8'
+          description: "GridGain version, ex. 8.5.1"
+      - string:
+          name: ATTR
+          default:
+          description: "Attributes list for test selection, comma separated. You can put tests names here."
+      - string:
+          name: SERVER_HOSTS
+          default: '172.25.1.37,172.25.1.38'
+          description: "IP for server hosts separated with comma. Please rewrite the default value."
+      - string:
+          name: CLIENT_HOSTS
+          default: '172.25.1.37,172.25.1.38'
+          description: "IP for client hosts, separated with comma. Please rewrite the default value."
+      - string:
+          name: ZK_HOSTS
+          default: ''
+          description: "IP for Zookeeper hosts, separated with comma. Please rewrite the default value."
+      - git-parameter:
+          name: BRANCH
+          description: Tiden branch name
+          type: PT_BRANCH
+          sortMode: ASCENDING_SMART
+          defaultValue: origin/master
+          selectedValue: DEFAULT
+          branchFilter: .*
+      - choice:
+          name: ATTR_MATCH
+          choices:
+            - any
+            - all
+          description: "Attribute match policy. Applies only when 'ATTR' is not empty."
+    scm:
+      - tiden-repo
+    wrappers:
+      - build-name:
+          name: '#$BUILD_NUMBER - $GRIDGAIN_VERSION'
+      - workspace-cleanup:
+          include: []
+      - timestamps
+      - build-user-vars
+      - ansicolor:
+          colormap: gnome-terminal
+    builders:
+      - config-file-provider:
+          files:
+            - file-id: 6fbbc991-7e18-40d3-a1b3-090fbc4dbe19
+              target: $WORKSPACE/qa_ftp.yaml
+      - shell: |
+          echo "#### Cleanup & create work/var folders at '$WORKSPACE' ####"
+          rm -rf $WORKSPACE/work 2>/dev/null
+          rm -rf $WORKSPACE/var 2>/dev/null
+          mkdir -p $WORKSPACE/work
+          mkdir -p $WORKSPACE/var
+
+          echo "#### Prepare working directory for '$IGNITE_VERSION/$GRIDGAIN_VERSION' ####"
+          cd tiden
+
+          bash \
+              utils/prepare_work_dir.sh \
+                  --work-dir=$WORKSPACE/work \
+                  --var-dir=$WORKSPACE/var \
+                  --config=$WORKSPACE/qa_ftp.yaml \
+                  --fetch-deps
+
+          bash \
+              utils/prepare_artifacts_config.sh \
+                  --work-dir=$WORKSPACE/work \
+                  --config=$WORKSPACE/tiden/config/jenkins-artifacts-gg-ult-fab.yaml
+
+          # just copy environment config to working directory for convenience
+          cp -f \
+              $WORKSPACE/tiden/config/env_jenkins.yaml \
+              $WORKSPACE/work/
+      - shell: |
+          cd tiden
+          export SHARED_ROOT=$WORKSPACE
+          bash utils/run-tests.sh {suite_name} {suite_pattern}
+    publishers:
+      - description-setter:
+          regexp: "^Desc: (.*)"
+          regexp-for-failed: "^Desc: (.*)"
+          description: "\\1"
+          description-for-failed: "\\1"
+      - archive:
+          artifacts: 'var/**/*'
+          allow-empty: 'true'
+          fingerprint: false
+          default-excludes: true
+      - junit:
+          results: 'var/xunit-{suite_name}.xml'
+          allow-empty-results: true
+          test-stability: true

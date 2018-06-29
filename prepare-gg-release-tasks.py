@@ -25,7 +25,13 @@ if __name__ == "__main__":
     # don't assert on GRIDGAIN_VERSION not set, because it can be only AI release
     # assert gridgain_version != '', "GRIDGAIN_VERSION environment variable not set"
 
-    test_plan = os.environ.get('TEST_PLAN', 'release')
+    test_plan = os.environ.get('TEST_PLAN', 'release').lower()
+    # 'Debug' only differs from 'Release' but NOT uploading results to QA FTP
+    root_folder_name = test_plan
+    debug = False
+    if test_plan == 'debug':
+        debug = True
+        test_plan = 'release'
 
     assert options.res_dir is not None, "use --res_dir option to select resources for jobs"
 
@@ -47,8 +53,8 @@ if __name__ == "__main__":
         if 'project' in template[k]:
             template[k]['project']['ignite_version'] = ignite_version
             template[k]['project']['gridgain_version'] = gridgain_version
-            template[k]['project']['root_folder_name'] = test_plan
-            template[k]['project']['root_folder_display_name'] = camelcase(test_plan)
+            template[k]['project']['root_folder_name'] = root_folder_name
+            template[k]['project']['root_folder_display_name'] = camelcase(root_folder_name)
 
             jobs_list = []
             # first collect all folder jobs
@@ -58,6 +64,11 @@ if __name__ == "__main__":
             # then collect all other jobs
             for job_name, job in jobs.items():
                 if 'job-folder' not in job[0].keys():
+                    if debug:
+                        if 'job-tiden' in job[0].keys():
+                            job = {
+                                'job-tiden-debug': job[0]['job-tiden'].copy()
+                            }
                     jobs_list.extend(job)
 
             if len(jobs_list) > 0:

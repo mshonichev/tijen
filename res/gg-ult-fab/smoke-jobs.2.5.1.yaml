@@ -12,12 +12,7 @@ job-edition-folder:
 job-branch-folder:
   - job-folder:
       folder_name: '{root_folder_name}/{edition_name}/{ignite_version}'
-      folder_display_name: '{edition_short_display_name} {ignite_version}/{gridgain_version} distributed tests'
-
-job-regress:
-  - job-tiden:
-      suite_name: 'regress'
-      suite_description: 'Regression and fixes'
+      folder_display_name: '{edition_short_display_name} {ignite_version}/{gridgain_version} smoke distributed tests'
 
 job-metrics:
   - job-tiden:
@@ -28,30 +23,27 @@ job-snapshots:
   - job-tiden:
       suite_name: 'snapshots'
       suite_pattern: 'snapshots.test_snapshots'
-      suite_description: 'Snapshots'
+      suite_description: 'Snapshots (smoke)'
+      attr: 'common'
 
 job-snapshots-pitr:
   - job-tiden:
       suite_name: 'snapshots_pitr'
       suite_pattern: 'snapshots.test_snapshots'
-      suite_description: 'Snapshots with Point-in-Time Recovery enabled'
+      suite_description: 'Point-in-Time Recovery (smoke)'
+      attr: 'common'
+      pitr_enabled: true
 
 job-pitr-shared:
   - job-tiden:
       suite_name: 'snapshots_pitr_shared'
       suite_pattern: 'snapshots.test_pitr'
-      suite_description: 'Point-in-Time Recovery from Shared folder'
-      attr: 'snared_folder'
+      attr: 'common'
+      suite_description: 'Point-in-Time Recovery from Shared folder (smoke)'
 
 job-baseline:
   - job-tiden:
       suite_name: 'baseline'
       suite_pattern: 'snapshots.test_baseline'
-      suite_description: 'Baseline topology'
-
-job-sequences:
-  - job-tiden:
-      suite_name: 'sequences'
-      suite_pattern: 'snapshots.test_sequences'
-      suite_description: 'Sequences'
-
+      attr: 'baseline'
+      suite_description: 'Baseline topology (only)'

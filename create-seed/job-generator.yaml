@@ -9,6 +9,7 @@
           credentials-id: mshonichev
           timeout: 20
           basedir: tiden
+
 - scm:
     name: tijen
     scm:
@@ -19,21 +20,17 @@
           credentials-id: mshonichev
           timeout: 20
           basedir: tijen
+
 - scm:
     name: tiden-and-tijen
     scm:
       - tiden
       - tijen
-#- job:
-#    name: Release
-#    project-type: folder
-#- job:
-#    name: Release/Util
-#    project-type: folder
+
 - job:
     name: util/util-create-ignite-release-tasks
     description: 'This job generates Jenkins tasks for Apache Ignite release'
-    display-name: '[util] Create AI release tasks'
+    display-name: '>>> [util] Create AI release tasks'
     scm:
       - tijen
     parameters:
@@ -53,18 +50,12 @@
           cd tijen
           export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
           python3 prepare-gg-release-tasks.py --var-dir var --res-dir res/ai || exit 1
-          jenkins-jobs --conf create-seed/jenkins.ini update var || exit 2
-#    - shell: |
-#        cd tiden
-#        utils/prepare_work_dir.sh
-#    - shell: |
-#        pwd
-#        ls -1 tiden/suites
-#        python3 run-tests.py --help
+          jenkins-jobs --conf create-seed/jenkins.ini update var/job-generator.yaml || exit 2
+
 - job:
     name: util/util-create-gridgain-release-tasks
     description: 'This job generates Jenkins tasks for GridGain Ultimate Edition release'
-    display-name: '[util] Create GG UE release tasks'
+    display-name: '>>> [util] Create GG UE release tasks'
     scm:
       - tijen
     parameters:
@@ -89,11 +80,3 @@
            export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
            python3 prepare-gg-release-tasks.py --var-dir var --res-dir res/gg-ult-fab || exit 1
            jenkins-jobs --conf create-seed/jenkins.ini update var/job-generator.yaml || exit 2
-
-#    - shell: |
-#        cd tiden
-#        bash utils/prepare_work_dir.sh
-#    - shell: |
-#        pwd
-#        ls -1 tiden/suites
-#        python3 run-tests.py --help
