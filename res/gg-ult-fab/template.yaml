@@ -117,6 +117,11 @@
           allow-empty: 'true'
           fingerprint: false
           default-excludes: true
+      - description-setter:
+          regexp: "Desc: (.*)"
+          regexp-for-failed: "Desc: (.*)"
+          description: "\1"
+          description-for-failed: "\1"
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
