@@ -123,12 +123,17 @@
           fingerprint: false
           default-excludes: true
       - junit:
-          results: var/xunit.xml
+          results: 'var/xunit-{suite_name}.xml'
           allow-empty-results: true
           test-stability: true
 #          claim-build: true
 #          measurement-plots: true
 #          flaky-test-reports: true
+      - ftp-publisher:
+          site-name: 'Publish_to_QA_FTP'
+          uploads:
+            - source-file: 'var/report-gridgain-{suite_name}.yaml'
+              file-path: '{ignite_version}/report/'
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
