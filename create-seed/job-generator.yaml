@@ -69,6 +69,12 @@
           name: GRIDGAIN_VERSION
           default: 8.5.1-p8
           description: "GridGain version, e.g. 8.5.1"
+      - choise:
+          name: ROOT_FOLDER
+          choices:
+            - Release
+            - Debug
+          description: "Root folder for tasks generation."
     builders:
       - shell: |
            cd tijen
