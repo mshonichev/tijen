@@ -112,16 +112,18 @@
           export SHARED_ROOT=$WORKSPACE
           bash utils/run-tests.sh {suite_name}
     publishers:
-      - archive:
-          artifacts: 'var/**/*'
-          allow-empty: 'true'
-          fingerprint: false
-          default-excludes: true
       - description-setter:
           regexp: "Desc: (.*)"
           regexp-for-failed: "Desc: (.*)"
           description: "\\1"
           description-for-failed: "\\1"
+      - archive:
+          artifacts: 'var/**/*'
+          allow-empty: 'true'
+          fingerprint: false
+          default-excludes: true
+      - junit:
+          results: var/xunit.xml
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
