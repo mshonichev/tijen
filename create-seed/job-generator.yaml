@@ -41,24 +41,24 @@
     '
     display-name: '[util] Create GG UE release tasks'
     scm:
-      - name: tiden
-        scm:
-          - git:
-            url: https://github.com/ggprivate/tiden.git
-            branches:
-              - '*/master'
-            credentials-id: mshonichev
-            timeout: 20
-            basedir: tiden
-      - name: tijen
-        scm:
-          - git:
-            url: https://github.com/mshonichev/tijen.git
-            branches:
-              - '*/master'
-            credentials-id: mshonichev
-            timeout: 20
-            basedir: tijen
+      name: tiden
+      scm:
+        - git:
+          url: https://github.com/ggprivate/tiden.git
+          branches:
+            - '*/master'
+          credentials-id: mshonichev
+          timeout: 20
+          basedir: tiden
+      name: tijen
+      scm:
+        - git:
+          url: https://github.com/mshonichev/tijen.git
+          branches:
+            - '*/master'
+          credentials-id: mshonichev
+          timeout: 20
+          basedir: tijen
     parameters:
       - string:
           name: IGNITE_VERSION
