@@ -10,7 +10,6 @@
     edition_name: gridgain-ultimate-fabric
 
 - job-template:
-    job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
     name: '{job_folder}/tiden-{suite_name}'
     id: job-tiden
     project-type: freestyle
@@ -135,7 +134,6 @@
 
 
 - job-template:
-    job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
     name: '{job_folder}/tiden-{suite_name}'
     id: job-tiden-debug
     project-type: freestyle

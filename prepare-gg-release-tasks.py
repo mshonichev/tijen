@@ -64,11 +64,14 @@ if __name__ == "__main__":
             # then collect all other jobs
             for job_name, job in jobs.items():
                 if 'job-folder' not in job[0].keys():
-                    if debug:
-                        if 'job-tiden' in job[0].keys():
+                    if 'job-tiden' in job[0].keys():
+                        if debug:
                             job = {
                                 'job-tiden-debug': job[0]['job-tiden'].copy()
                             }
+
+                        job[0]['job-tiden']['job_folder'] = '{root_folder_name}/{edition_name}/{ignite_version}'
+
                     jobs_list.extend(job)
 
             if len(jobs_list) > 0:
