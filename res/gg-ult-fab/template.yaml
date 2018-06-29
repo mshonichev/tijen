@@ -57,6 +57,10 @@
       - build-name-setter:
           template: '#$BUILD_NUMBER - $GRIDGAIN_VERSION'
           macro: true
+      - config-file-provider:
+          files:
+            - file_id: qa_ftp.yaml
+              target: $WORKSPACE/qa_ftp.yaml
       - shell: |
           echo "#### Cleanup & create work/var folders at '$WORKSPACE' ####"
           rm -rf $WORKSPACE/work 2>/dev/null
