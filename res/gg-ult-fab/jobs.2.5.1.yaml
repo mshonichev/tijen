@@ -17,4 +17,3 @@ job-branch-folder:
       project-type: folder
       display-name: {edition_display_name} {ignite_version} distributed tests
 
-job-suite-regress:
