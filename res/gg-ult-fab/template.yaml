@@ -14,7 +14,7 @@
     id: job-tiden
     project-type: freestyle
     description: 'Run suite {suite_name}'
-    display_name: '[suite] {suite_name}'
+    display-name: '[suite] {suite_name}'
     parameters:
       - string:
           name: IGNITE_VERSION
@@ -138,7 +138,7 @@
     id: job-tiden-debug
     project-type: freestyle
     description: 'Run suite {suite_name}'
-    display_name: '[suite] {suite_description}'
+    display-name: '[suite] {suite_description}'
     parameters:
       - string:
           name: IGNITE_VERSION
