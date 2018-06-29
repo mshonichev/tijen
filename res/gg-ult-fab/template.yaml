@@ -120,8 +120,8 @@
       - description-setter:
           regexp: "Desc: (.*)"
           regexp-for-failed: "Desc: (.*)"
-          description: "\1"
-          description-for-failed: "\1"
+          description: "\\1"
+          description-for-failed: "\\1"
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
