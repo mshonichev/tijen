@@ -28,11 +28,26 @@ job-snapshots:
   - job-tiden:
       job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
       suite_name: 'snapshots'
+      suite_pattern: 'snapshots.test_snapshots'
+      attr: 'common'
+# -INDEX
+# pitr_enabled
+
+job-snapshots-pitr:
+  - job-tiden:
+      job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
+      suite_name: 'snapshots-pitr'
+      suite_pattern: 'snapshots.test_snapshots'
+      attr: 'common'
+      pitr_enabled: true
+
+# -INDEX
+# pitr_enabled
 
 job-pitr-shared:
   - job-tiden:
       job_folder: '{root_folder_name}/{edition_name}/{ignite_version}'
-      suite_name: 'pitr'
+      suite_name: 'snapshots-pitr-shared'
 
 job-baseline:
   - job-tiden:
