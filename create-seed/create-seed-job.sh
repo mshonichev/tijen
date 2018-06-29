@@ -11,7 +11,7 @@ cd $(dirname $0)
 #set
 
 if [ ! "$JENKINS_HOME" = "" ]; then
-    ls -la $JENKINS_HOME
+#    ls -la $JENKINS_HOME
     mkdir -p $JENKINS_HOME/workspace/.jobs-builder-cache
     export XDG_CACHE_HOME="$JENKINS_HOME/workspace/.jobs-builder-cache"
 fi

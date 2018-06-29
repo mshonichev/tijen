@@ -8,26 +8,15 @@
 - job:
     name: Release/Util/util-create-ignite-release-tasks
     description: 'This job generates Jenkins tasks for Apache Ignite release\n'
-    display-name: [util] Create AI release tasks
+    display-name: '[util] Create AI release tasks'
     scm:
-#      - name: tiden
-#        scm:
       - git:
           url: https://github.com/ggprivate/tiden.git
           branches:
             - */master
           credentials-id: mshonichev
           timeout: 20
-#          browser: githubweb
-#          browser-url: https://github.com/
           basedir: tiden
-#      - git:
-#          url: https://github.com/mshonichev/tijen.git
-#          branches:
-#              - origin/master
-#          credentials-id: mshonichev
-#          timeout: 20
-#          basedir: tijen
     parameters:
       - string:
           name: IGNITE_VERSION
@@ -40,9 +29,3 @@
         pwd
         ls -1 tiden/suites
         python3 run-tests.py --help
-#    - dsl:
-#        target: "*.groovy"
-#        ignore-existing: "false"
-#        removed-job-action: "DISABLE"
-#        removed-view-action: "DELETE"
-#        lookup-strategy: "SEED_JOB"
