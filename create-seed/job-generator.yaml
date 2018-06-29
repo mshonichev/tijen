@@ -23,6 +23,11 @@
           default: 2.5.1-p8
           description: "Apache Ignite version, e.g. 2.5.1"
     builders:
+     - shell: |
+         cd tijen
+         export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
+         python3 prepare-gg-release-tasks.py --var_dir var --res_dir res/ai || exit 1
+         jenkins-jobs --conf create_seed/jenkins.ini update var/*.yaml || exit 2
 #    - shell: |
 #        cd tiden
 #        utils/prepare_work_dir.sh
@@ -36,13 +41,24 @@
     '
     display-name: '[util] Create GG UE release tasks'
     scm:
-      - git:
-          url: https://github.com/ggprivate/tiden.git
-          branches:
-            - '*/master'
-          credentials-id: mshonichev
-          timeout: 20
-          basedir: tiden
+      - name: tiden
+        scm:
+          - git:
+            url: https://github.com/ggprivate/tiden.git
+            branches:
+              - '*/master'
+            credentials-id: mshonichev
+            timeout: 20
+            basedir: tiden
+      - name: tijen
+        scm:
+          - git:
+            url: https://github.com/mshonichev/tijen.git
+            branches:
+              - '*/master'
+            credentials-id: mshonichev
+            timeout: 20
+            basedir: tijen
     parameters:
       - string:
           name: IGNITE_VERSION
@@ -53,6 +69,12 @@
           default: 8.5.1-p8
           description: "GridGain version, e.g. 8.5.1"
     builders:
+     - shell: |
+         cd tijen
+         export PYTHONPATH=$PYTHONPATH:$(readlink -f ../tiden)
+         python3 prepare-gg-release-tasks.py --var_dir var --res_dir res/gg-ult-fab || exit 1
+         jenkins-jobs --conf create_seed/jenkins.ini update var/*.yaml || exit 2
+
 #    - shell: |
 #        cd tiden
 #        bash utils/prepare_work_dir.sh
