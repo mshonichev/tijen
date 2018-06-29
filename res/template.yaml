@@ -1,5 +1,4 @@
 ---
-
 - scm:
     name: tiden-repo
     scm:
@@ -18,7 +17,8 @@
     display-name: '{folder_display_name}'
 
 - view-template:
-    name: tests
+    id: tests
+    name: '{root_folder_name}/{edition_name}/{ignite_version}/tests'
     view-type: list
     description: Tests
     regex: 'tiden-*'
