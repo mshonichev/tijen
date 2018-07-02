@@ -24,34 +24,64 @@ job-metrics:
       suite_name: 'metrics'
       suite_description: 'JMX metrics'
 
+# https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_snapshots/configure
 job-snapshots:
   - job-tiden:
       suite_name: 'snapshots'
       suite_pattern: 'snapshots.test_snapshots'
       suite_description: 'Snapshots'
 
+# https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_snapshots/configure
 job-snapshots-pitr:
   - job-tiden:
       suite_name: 'snapshots_pitr'
       suite_pattern: 'snapshots.test_snapshots'
       suite_description: 'Snapshots with Point-in-Time Recovery enabled'
+      option: pitr_enabled=True
 
+# https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_pitr_shared_folder/
 job-pitr-shared:
   - job-tiden:
       suite_name: 'snapshots_pitr_shared'
       suite_pattern: 'snapshots.test_pitr'
       suite_description: 'Point-in-Time Recovery from Shared folder'
-      attr: 'snared_folder'
+      attr: snared_folder
+      option: pitr_enabled=True
 
+# https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_pitr/configure
+job-pitr-compaction:
+  - job-tiden:
+      suite_name: 'pitr_compaction'
+      suite_pattern: 'snapshots.test_pitr'
+      suite_description: 'Point-in-Time Recovery with WAL Compaction'
+      attr: common
+      option: pitr_enabled=True compaction_enabled=True
+
+# https://jenkins.gridgain.com/job/GridGain_regression/job/Baseline/
 job-baseline:
   - job-tiden:
       suite_name: 'baseline'
       suite_pattern: 'snapshots.test_baseline'
       suite_description: 'Baseline topology'
+      option: environment.servers_per_host=3
 
+# https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_sequences/
 job-sequences:
   - job-tiden:
       suite_name: 'sequences'
       suite_pattern: 'snapshots.test_sequences'
       suite_description: 'Sequences'
 
+# https://jenkins.gridgain.com/job/User_tests/job/dsherstobitov/job/LRT/
+job-lrt:
+  - job-tiden:
+      suite_name: 'lrt'
+      suite_pattern: 'sow.test_lrt'
+      suite_description: 'Long Running Transactions'
+
+# https://jenkins.gridgain.com/job/User_tests/job/dsherstobitov/job/Rebalance/
+job-rebalance:
+  - job-tiden:
+      suite_name: 'rebalance'
+      suite_pattern: 'rebalance.test_rebalance'
+      suite_description: 'Rebalance tests'

@@ -1,4 +1,9 @@
 ---
+###########################################
+# WARNING: AI RELEASE TASKS NOT YET READY
+###########################################
+
+
 
 # These variables are overridden by prepare-gg-release-tasks.py
 - project:
@@ -49,8 +54,8 @@
       - choice:
           name: ATTR_MATCH
           choices:
-            - any
             - all
+            - any
           description: "Attribute match policy. Applies only when 'ATTR' is not empty."
     scm:
       - tiden-repo
