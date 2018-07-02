@@ -89,9 +89,9 @@ if __name__ == "__main__":
                         job[0]['job-tiden']['job_folder'] = '{root_folder_name}/{edition_name}/{ignite_version}'
 
                         if debug:
-                            job = {
-                                'job-tiden-debug': job[0]['job-tiden'].copy()
-                            }
+                            job = [{
+                                'job-tiden-debug': deepcopy(job[0]['job-tiden'])
+                            }]
 
                     jobs_list.extend(job)
 
