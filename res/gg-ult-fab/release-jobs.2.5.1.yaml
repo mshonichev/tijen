@@ -37,7 +37,7 @@ job-snapshots-pitr:
       suite_name: 'snapshots_pitr'
       suite_pattern: 'snapshots.test_snapshots'
       suite_description: 'Snapshots with Point-in-Time Recovery enabled'
-      option: pitr_enabled=True
+      option: 'pitr_enabled=True'
 
 # https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_pitr_shared_folder/
 job-pitr-shared:
@@ -45,8 +45,8 @@ job-pitr-shared:
       suite_name: 'snapshots_pitr_shared'
       suite_pattern: 'snapshots.test_pitr'
       suite_description: 'Point-in-Time Recovery from Shared folder'
-      attr: snared_folder
-      option: pitr_enabled=True
+      attr: 'snared_folder'
+      option: 'pitr_enabled=True'
 
 # https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_pitr/configure
 job-pitr-compaction:
@@ -54,8 +54,8 @@ job-pitr-compaction:
       suite_name: 'pitr_compaction'
       suite_pattern: 'snapshots.test_pitr'
       suite_description: 'Point-in-Time Recovery with WAL Compaction'
-      attr: common
-      option: pitr_enabled=True compaction_enabled=True
+      attr: 'common'
+      option: 'pitr_enabled=True compaction_enabled=True'
 
 # https://jenkins.gridgain.com/job/GridGain_regression/job/Baseline/
 job-baseline:
@@ -63,7 +63,7 @@ job-baseline:
       suite_name: 'baseline'
       suite_pattern: 'snapshots.test_baseline'
       suite_description: 'Baseline topology'
-      option: environment.servers_per_host=3
+      option: 'environment.servers_per_host=3'
 
 # https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_sequences/
 job-sequences:

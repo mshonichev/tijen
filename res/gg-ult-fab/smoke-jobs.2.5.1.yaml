@@ -24,28 +24,28 @@ job-snapshots:
       suite_name: 'snapshots'
       suite_pattern: 'snapshots.test_snapshots'
       suite_description: 'Snapshots (smoke)'
-      attr: common
+      attr: 'common'
 
 job-snapshots-pitr:
   - job-tiden:
       suite_name: 'snapshots_pitr'
       suite_pattern: 'snapshots.test_snapshots'
       suite_description: 'Point-in-Time Recovery (smoke)'
-      attr: common
-      option: pitr_enabled=True
+      attr: 'common'
+      option: 'pitr_enabled=True'
 
 job-pitr-shared:
   - job-tiden:
       suite_name: 'snapshots_pitr_shared'
       suite_pattern: 'snapshots.test_pitr'
       attr: 'common,shared'
-      attr_match: all
-      option: pitr_enabled=True
+      attr_match: 'all'
+      option: 'pitr_enabled=True'
       suite_description: 'Point-in-Time Recovery from Shared folder (smoke)'
 
 job-baseline:
   - job-tiden:
       suite_name: 'baseline'
       suite_pattern: 'snapshots.test_baseline'
-      attr: baseline
+      attr: 'baseline'
       suite_description: 'Baseline topology (only)'

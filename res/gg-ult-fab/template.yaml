@@ -9,6 +9,7 @@
     edition_short_display_name: GG UE
     edition_name: gridgain-ultimate-fabric
     attr_match: any
+    suite_pattern: ''
     attr: ''
     option: ''
     views:

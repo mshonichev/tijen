@@ -22,5 +22,10 @@
     name: '{root_folder_name}/{edition_name}/{ignite_version}/tests'
     view-type: list
     description: Tests
+    columns:
+      - extra-tests-total
+      - extra-tests-passed
+      - extra-tests-failed
+      - extra-tests-skipped
     regex: 'tiden-.*'
 
