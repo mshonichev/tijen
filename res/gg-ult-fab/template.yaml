@@ -11,7 +11,8 @@
     attr_match: any
     attr: ''
     option: ''
-
+    views:
+      - tests
 
 - job-template:
     name: '{job_folder}/tiden-{suite_name}'

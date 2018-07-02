@@ -11,10 +11,16 @@
           timeout: 20
           basedir: tiden
 
-
 - job-template:
     name: '{folder_name}'
     id: 'job-folder'
     project-type: folder
     display-name: '{folder_display_name}'
+
+- view-template:
+    id: tests
+    name: '{root_folder_name}/{edition_name}/{ignite_version}/tests'
+    view-type: list
+    description: Tests
+    regex: 'tiden-.*'
 
