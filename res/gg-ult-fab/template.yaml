@@ -23,11 +23,11 @@
     parameters:
       - string:
           name: IGNITE_VERSION
-          default: '2.5.1-p8'
+          default: '{ignite_version}'
           description: "Apache Ignite version, ex. 2.5.1"
       - string:
           name: GRIDGAIN_VERSION
-          default: '8.5.1-p8'
+          default: '{gridgain_version}'
           description: "GridGain version, ex. 8.5.1"
       - string:
           name: ATTR
