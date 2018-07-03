@@ -24,7 +24,7 @@
     description: Tests
     columns:
       - status
-      - desc
+      - job
       - last-duration
       - extra-tests-total
       - extra-tests-passed
