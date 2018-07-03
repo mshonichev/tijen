@@ -132,6 +132,7 @@
 
 - job-template:
     id: job-buildall-naive
+    name: run-all
     description: 'Run All'
     display-name: '>> Run All tests'
     project-type: multijob
