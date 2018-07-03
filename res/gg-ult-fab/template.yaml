@@ -157,8 +157,7 @@
           execution-type: 'SEQUENTIALLY'
           projects:
             - name: 'util/lock_servers'
-              predefined-parameters:
-                HOSTS: '$SERVER_HOSTS,$CLIENT_HOSTS,$ZK_HOSTS'
+              predefined-parameters: "HOSTS='$SERVER_HOSTS,$CLIENT_HOSTS,$ZK_HOSTS'"
       - multijob:
           id: tests
           name: 'Run tests'
@@ -176,9 +175,5 @@
           condition: 'SUCCESSFUL'
           execution-type: 'SEQUENTIALLY'
           projects:
-            - name: 'util/lock_servers'
-              predefined-parameters:
-                HOSTS: '$SERVER_HOSTS,$CLIENT_HOSTS,$ZK_HOSTS'
             - name: 'util/unlock_servers'
-              predefined-parameters:
-                HOSTS: '$SERVER_HOSTS,$CLIENT_HOSTS,$ZK_HOSTS'
+              predefined-parameters: "HOSTS='$SERVER_HOSTS,$CLIENT_HOSTS,$ZK_HOSTS'"
