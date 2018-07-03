@@ -24,11 +24,15 @@
     description: Tests
     columns:
       - status
+      - desc
       - last-duration
       - extra-tests-total
       - extra-tests-passed
       - extra-tests-failed
       - extra-tests-skipped
       - extra-last-output
+      - extra-workspace-link
+      - extra-configure-button
+      - build-button
     regex: 'tiden-.*'
 
