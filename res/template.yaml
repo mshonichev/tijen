@@ -32,26 +32,26 @@
       - extra-last-output
     regex: 'tiden-.*'
 
-job-template:
-  id: job-buildall-naive
-  project-type: multijob
-  builders:
-    - multijob:
-        name: PhaseOne
-        condition: SUCCESSFUL
-        projects:
-          - name: PhaseOneJobA
-            current-parameters: true
-            git-revision: true
-          - name: PhaseOneJobB
-            current-parameters: true
-            property-file: build.props
-    - multijob:
-        name: PhaseTwo
-        condition: UNSTABLE
-        projects:
-          - name: PhaseTwoJobA
-            current-parameters: true
-            predefined-parameters: foo=bar
-          - name: PhaseTwoJobB
-            current-parameters: false
+#job-template:
+#  id: job-buildall-naive
+#  project-type: multijob
+#  builders:
+#    - multijob:
+#        name: PhaseOne
+#        condition: SUCCESSFUL
+#        projects:
+#          - name: PhaseOneJobA
+#            current-parameters: true
+#            git-revision: true
+#          - name: PhaseOneJobB
+#            current-parameters: true
+#            property-file: build.props
+#    - multijob:
+#        name: PhaseTwo
+#        condition: UNSTABLE
+#        projects:
+#          - name: PhaseTwoJobA
+#            current-parameters: true
+#            predefined-parameters: foo=bar
+#          - name: PhaseTwoJobB
+#            current-parameters: false
