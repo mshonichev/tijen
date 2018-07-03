@@ -138,10 +138,19 @@ if __name__ == "__main__":
                                             '/'.join([root_folder_name, edition_name, ignite_version, job_short_name]))
 
                         # now update multijob template (ooops, it can be used only once per suite!)
+
+                        # update job name to put it under folder
+                        naive_build_all_job['job-template']['name'] = '/'.join(
+                            [root_folder_name, edition_name, ignite_version,
+                             naive_build_all_job['job-template']['name']])
+
+                        # extract step template ...
                         build_all_phase = naive_build_all_job['job-template']['builders'][0]['multijob']
                         step_template = deepcopy(build_all_phase['projects'][0])
+                        # ... and remove all current steps ...
                         build_all_phase['projects'] = []
 
+                        # ... in order to add only required steps
                         for step_name in step_names:
                             step = deepcopy(step_template)
                             step['name'] = step_name
