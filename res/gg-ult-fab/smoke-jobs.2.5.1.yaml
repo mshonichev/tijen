@@ -49,3 +49,7 @@ job-baseline:
       suite_pattern: 'snapshots.test_baseline'
       attr: 'baseline'
       suite_description: 'Baseline topology (only)'
+
+job-buildall:
+  - job-buildall-naive:
+      phase_regex: '(tiden|ddtest)-.*'
