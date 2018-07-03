@@ -85,3 +85,7 @@ job-rebalance:
       suite_name: 'rebalance'
       suite_pattern: 'rebalance.test_rebalance'
       suite_description: 'Rebalance tests'
+
+job-buildall:
+  - job-buildall-naive:
+      task_regex: .*

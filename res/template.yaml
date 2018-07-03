@@ -23,9 +23,35 @@
     view-type: list
     description: Tests
     columns:
+      - status
+      - last-duration
       - extra-tests-total
       - extra-tests-passed
       - extra-tests-failed
       - extra-tests-skipped
+      - extra-last-output
     regex: 'tiden-.*'
 
+job-template:
+  id: job-buildall-naive
+  project-type: multijob
+  builders:
+    - multijob:
+        name: PhaseOne
+        condition: SUCCESSFUL
+        projects:
+          - name: PhaseOneJobA
+            current-parameters: true
+            git-revision: true
+          - name: PhaseOneJobB
+            current-parameters: true
+            property-file: build.props
+    - multijob:
+        name: PhaseTwo
+        condition: UNSTABLE
+        projects:
+          - name: PhaseTwoJobA
+            current-parameters: true
+            predefined-parameters: foo=bar
+          - name: PhaseTwoJobB
+            current-parameters: false
