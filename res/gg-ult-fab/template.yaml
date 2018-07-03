@@ -156,7 +156,7 @@
           execution-type: 'SEQUENTIALLY'
           projects:
             - name: test
-              git-revision: true
+#              git-revision: true
               abort-all-job: true
               aggregate-results: true
               current-parameters: true
