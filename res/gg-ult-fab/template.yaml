@@ -123,14 +123,6 @@
           results: 'var/xunit-{suite_name}.xml'
           allow-empty-results: true
           test-stability: true
-#          claim-build: true
-#          measurement-plots: true
-#          flaky-test-reports: true
-#      - ftp-publisher:
-#          site-name: 'Publish_to_QA_FTP'
-#          uploads:
-#            - source-file: 'var/report-gridgain-{suite_name}.yaml'
-#              file-path: '{ignite_version}/report/'
       - ftp:
           site: 'Publish_to_QA_FTP'
           source: 'var/report-gridgain-{suite_name}.yaml'
@@ -138,3 +130,33 @@
           flatten: true
           fail-on-error: true
 
+- job-template:
+    id: job-buildall-naive
+    description: 'Run All'
+    display-name: '>> Run All tests'
+    project-type: multijob
+    parameters:
+      - string:
+          name: SERVER_HOSTS
+          default: '172.25.1.37,172.25.1.38'
+          description: "IP for server hosts separated with comma. Please rewrite the default value."
+      - string:
+          name: CLIENT_HOSTS
+          default: '172.25.1.37,172.25.1.38'
+          description: "IP for client hosts, separated with comma. Please rewrite the default value."
+      - string:
+          name: ZK_HOSTS
+          default: ''
+          description: "IP for Zookeeper hosts, separated with comma. Please rewrite the default value."
+    builders:
+      - multijob:
+          name: 'Run tests'
+          condition: 'SUCCESSFUL'
+          execution-type: 'SEQUENTIALLY'
+          projects:
+            - name: test
+              git-revision: true
+              abort-all-job: true
+              aggregate-results: true
+              current-parameters: true
+              kill-phase-on: 'NEVER'

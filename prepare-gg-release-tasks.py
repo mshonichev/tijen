@@ -2,6 +2,7 @@ import os
 from util import versioned_yaml, load_yaml, save_yaml, camelcase
 from optparse import OptionParser
 from copy import deepcopy
+import re
 
 if __name__ == "__main__":
     parser = OptionParser()
@@ -52,13 +53,13 @@ if __name__ == "__main__":
         if 'job-template' in template[k]:
             if 'id' in template[k]['job-template']:
                 if 'job-tiden' == template[k]['job-template']['id']:
-                    tiden_job = template[k].copy()
+                    tiden_job = deepcopy(template[k])
                     break
 
     if tiden_job:
         tiden_debug_job = deepcopy(tiden_job)
         tiden_debug_job['job-template']['id'] = 'job-tiden-debug'
-        for k,v in enumerate(tiden_debug_job['job-template']['publishers']):
+        for k, v in enumerate(tiden_debug_job['job-template']['publishers']):
             if 'ftp' in tiden_debug_job['job-template']['publishers'][k]:
                 if 'Publish_to_QA_FTP' == tiden_debug_job['job-template']['publishers'][k]['ftp']['site']:
                     del tiden_debug_job['job-template']['publishers'][k]
@@ -67,33 +68,90 @@ if __name__ == "__main__":
 
         template.append(tiden_debug_job)
 
+    naive_build_all_job = None
+    for k, v in enumerate(template):
+        if 'job-template' in template[k]:
+            if 'id' in template[k]['job-template']:
+                if 'job-buildall-naive' == template[k]['job-template']['id']:
+                    naive_build_all_job = template[k]
+                    break
+
     print("*** Loading jobs specifications from %s ***" % os.path.abspath(options.res_dir))
     jobs = versioned_yaml(ignite_version, test_plan + '-jobs.*.yaml', os.path.abspath(options.res_dir))
 
+    job_folder = '{root_folder_name}/{edition_name}/{ignite_version}'
+    edition_name = ''
     for k, v in enumerate(template):
         if 'project' in template[k]:
             template[k]['project']['ignite_version'] = ignite_version
             template[k]['project']['gridgain_version'] = gridgain_version
             template[k]['project']['root_folder_name'] = root_folder_name
+            edition_name = template[k]['project']['edition_name']
             template[k]['project']['root_folder_display_name'] = camelcase(root_folder_name)
 
             jobs_list = []
             # first collect all folder jobs
             for job_name, job in jobs.items():
-                if 'job-folder' in job[0].keys():
+                job_type = list(job[0].keys())[0]
+                if 'job-folder' == job_type:
                     jobs_list.extend(job)
-            # then collect all other jobs
+
+            # then collect all other jobs but for buildall
             for job_name, job in jobs.items():
-                if 'job-folder' not in job[0].keys():
-                    if 'job-tiden' in job[0].keys():
-                        job[0]['job-tiden']['job_folder'] = '{root_folder_name}/{edition_name}/{ignite_version}'
+                job_type = list(job[0].keys())[0]
+                if 'job-folder' != job_type and 'buildall' not in job_type:
+                    if 'job-tiden' == job_type:
+                        job[0][job_type]['job_folder'] = job_folder
 
                         if debug:
                             job = [{
-                                'job-tiden-debug': deepcopy(job[0]['job-tiden'])
+                                'job-tiden-debug': deepcopy(job[0][job_type])
                             }]
 
                     jobs_list.extend(job)
+
+            # generate naive buildall job
+            if naive_build_all_job is not None:
+                for job_name, job in jobs.items():
+                    job_type = list(job[0].keys())[0]
+                    if 'job-buildall-naive' == job_type:
+                        phase_regex = '.*'
+                        if 'phase_regex' in job[0][job_type]:
+                            phase_regex = job[0][job_type]['phase_regex']
+
+                        step_names = []
+                        for job_name, job in jobs.items():
+                            job_type = list(job[0].keys())[0]
+                            if job_type != 'job-folder' and 'buildall' not in job_type:
+                                job_short_name = None
+                                if 'job-tiden' in job_type:
+                                    suite_name = job[0][job_type]['suite_name']
+                                    job_short_name = 'tiden-' + suite_name
+                                elif 'job-ddtest' in job_type:
+                                    suite_name = job[0][job_type]['suite_name']
+                                    job_short_name = 'ddtest-' + suite_name
+                                elif 'name' in job[0][job_type].keys():
+                                    job_short_name = job[0][job_type]['name']
+                                if job_short_name is not None:
+                                    if re.match(phase_regex, job_short_name):
+                                        step_names.append(
+                                            '/'.join([root_folder_name, edition_name, ignite_version, job_short_name]))
+
+                        # now update multijob template (ooops, it can be used only once per suite!)
+                        build_all_phase = naive_build_all_job['job-template']['builders'][0]['multijob']
+                        step_template = deepcopy(build_all_phase['projects'][0])
+                        build_all_phase['projects'] = []
+
+                        for step_name in step_names:
+                            step = deepcopy(step_template)
+                            step['name'] = step_name
+                            build_all_phase['projects'].append(step)
+
+                        job = [{
+                            'job-buildall-naive': {}
+                        }]
+                        jobs_list.extend(job)
+                        break
 
             if len(jobs_list) > 0:
                 template[k]['project']['jobs'] = jobs_list
