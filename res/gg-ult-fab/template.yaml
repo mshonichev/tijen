@@ -151,13 +151,34 @@
           description: "IP for Zookeeper hosts, separated with comma. Please rewrite the default value."
     builders:
       - multijob:
+          id: lock
+          name: 'Lock servers'
+          condition: 'SUCCESSFUL'
+          execution-type: 'SEQUENTIALLY'
+          projects:
+            - name: 'util/lock_servers'
+              predefined-parameters:
+                HOSTS: '$SERVER_HOSTS,$CLIENT_HOSTS,$ZK_HOSTS'
+      - multijob:
+          id: tests
           name: 'Run tests'
           condition: 'SUCCESSFUL'
           execution-type: 'SEQUENTIALLY'
           projects:
-            - name: test
-#              git-revision: true
+            - name: 'test'
               abort-all-job: true
               aggregate-results: true
               current-parameters: true
               kill-phase-on: 'NEVER'
+      - multijob:
+          id: unlock
+          name: 'Unlock servers'
+          condition: 'SUCCESSFUL'
+          execution-type: 'SEQUENTIALLY'
+          projects:
+            - name: 'util/lock_servers'
+              predefined-parameters:
+                HOSTS: '$SERVER_HOSTS,$CLIENT_HOSTS,$ZK_HOSTS'
+            - name: 'util/unlock_servers'
+              predefined-parameters:
+                HOSTS: '$SERVER_HOSTS,$CLIENT_HOSTS,$ZK_HOSTS'

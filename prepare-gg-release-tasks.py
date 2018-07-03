@@ -145,22 +145,28 @@ if __name__ == "__main__":
                              naive_build_all_job['job-template']['name']])
 
                         # extract step template ...
-                        build_all_phase = naive_build_all_job['job-template']['builders'][0]['multijob']
-                        step_template = deepcopy(build_all_phase['projects'][0])
-                        # ... and remove all current steps ...
-                        build_all_phase['projects'] = []
+                        build_all_phase = None
+                        for phase in naive_build_all_job['job-template']['builders']:
+                            if 'multijob' in phase:
+                                if 'id' in phase['multijob'] and phase['multijob']['id'] == 'tests':
+                                    build_all_phase = phase['multijob']
+                                    break
+                        if build_all_phase is not None:
+                            step_template = deepcopy(build_all_phase['projects'][0])
+                            # ... and remove all current steps ...
+                            build_all_phase['projects'] = []
 
-                        # ... in order to add only required steps
-                        for step_name in step_names:
-                            step = deepcopy(step_template)
-                            step['name'] = step_name
-                            build_all_phase['projects'].append(step)
+                            # ... in order to add only required steps
+                            for step_name in step_names:
+                                step = deepcopy(step_template)
+                                step['name'] = step_name
+                                build_all_phase['projects'].append(step)
 
-                        job = [{
-                            'job-buildall-naive': {}
-                        }]
-                        jobs_list.extend(job)
-                        break
+                            job = [{
+                                'job-buildall-naive': {}
+                            }]
+                            jobs_list.extend(job)
+                            break
 
             if len(jobs_list) > 0:
                 template[k]['project']['jobs'] = jobs_list
