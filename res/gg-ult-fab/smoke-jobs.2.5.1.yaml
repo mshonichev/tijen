@@ -39,7 +39,8 @@ job-pitr-shared:
       suite_name: 'snapshots_pitr_shared'
       suite_pattern: 'snapshots.test_pitr'
       attr: 'shared_folder'
-      attr_match: 'all'
+#      attr: 'shared_folder,common'
+#      attr_match: 'all'
       option: 'pitr_enabled=True'
       suite_description: 'Point-in-Time Recovery from Shared folder (smoke)'
 

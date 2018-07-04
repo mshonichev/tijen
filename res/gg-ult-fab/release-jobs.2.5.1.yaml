@@ -45,7 +45,7 @@ job-pitr-shared:
       suite_name: 'snapshots_pitr_shared'
       suite_pattern: 'snapshots.test_pitr'
       suite_description: 'Point-in-Time Recovery from Shared folder'
-      attr: 'snared_folder'
+      attr: 'shared_folder'
       option: 'pitr_enabled=True'
 
 # https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_pitr/configure
@@ -55,6 +55,16 @@ job-pitr-compaction:
       suite_pattern: 'snapshots.test_pitr'
       suite_description: 'Point-in-Time Recovery with WAL Compaction'
       attr: 'common'
+      option: 'pitr_enabled=True compaction_enabled=True'
+
+
+# https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_pitr/configure
+job-pitr-compaction:
+  - job-tiden:
+      suite_name: 'pitr_compaction'
+      suite_pattern: 'snapshots.test_pitr'
+      suite_description: 'Point-in-Time Recovery from Shared folder with WAL Compaction'
+      attr: 'shared_folder'
       option: 'pitr_enabled=True compaction_enabled=True'
 
 # https://jenkins.gridgain.com/job/GridGain_regression/job/Baseline/
