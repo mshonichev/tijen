@@ -61,7 +61,7 @@ job-pitr-compaction:
 # https://jenkins.gridgain.com/job/GridGain_regression/job/tiden_pitr/configure
 job-pitr-compaction:
   - job-tiden:
-      suite_name: 'pitr_compaction'
+      suite_name: 'pitr_compaction_shared'
       suite_pattern: 'snapshots.test_pitr'
       suite_description: 'Point-in-Time Recovery from Shared folder with WAL Compaction'
       attr: 'shared_folder'
